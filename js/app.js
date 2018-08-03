@@ -271,7 +271,7 @@ function nameElement(){
     const yourName = document.createElement('span');
     yourName.style.display = 'block';
     yourName.style.fontSize = '2em';
-    yourName.style.marginLeft = '6.25em';
+    yourName.style.marginLeft = '7.75em';
     yourName.style.marginTop = '1.5em';
     yourName.style.color = '#FFA000';
     yourName.textContent = nameInput.value;
