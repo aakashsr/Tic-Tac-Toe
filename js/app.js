@@ -1,5 +1,6 @@
 const startButton = document.getElementsByClassName('button')[0];
 const newGameButton = document.getElementsByClassName('button')[1];
+const board = document.getElementsByClassName('board')[0];
 const startScreen = document.getElementById('start');
 const finishScreen = document.getElementById('finish');
 const finishMessage = finishScreen.querySelector('.message');
@@ -41,6 +42,7 @@ startButton.addEventListener('click', (event) => {
     player1.style.display = 'block';
     player2.style.display = 'block';
     player1.classList.add('active');
+    nameElement();
 });
 
 boxes.addEventListener('mouseover', (e) => {
@@ -134,7 +136,7 @@ function ifPlayerOneWin() {
 
         boxes.style.display = 'none';
         finishScreen.classList.add('screen-win-one');
-        finishMessage.textContent = "Winner";
+        finishMessage.textContent = nameInput.value + " is winner";
         finishScreen.style.display = 'block';
         return true;
     }
@@ -186,7 +188,7 @@ function ifTie() {
     if (count === 9 && !ifPlayerOneWin() && !ifPlayerTwoWin()) {
         boxes.style.display = 'none';
         finishScreen.classList.add('screen-win-tie');
-        finishMessage.textContent = "It's a Tie";
+        finishMessage.textContent = "It's a tie";
         finishScreen.style.display = 'block';
         return true;
     }
@@ -264,3 +266,14 @@ header.addEventListener('keydown', (e) => {
         
     }
 });
+
+function nameElement(){
+    const yourName = document.createElement('span');
+    yourName.style.display = 'block';
+    yourName.style.fontSize = '2em';
+    yourName.style.marginLeft = '6.25em';
+    yourName.style.marginTop = '1.5em';
+    yourName.style.color = '#FFA000';
+    yourName.textContent = nameInput.value;
+    board.insertBefore( yourName , boxes);
+}
