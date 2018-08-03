@@ -143,36 +143,36 @@ function ifPlayerOneWin() {
 
 function ifPlayerTwoWin() {
     if (listToArray[0].classList.contains('box-filled-2') &&
-    listToArray[1].classList.contains('box-filled-2') &&
-    listToArray[2].classList.contains('box-filled-2') ||
+        listToArray[1].classList.contains('box-filled-2') &&
+        listToArray[2].classList.contains('box-filled-2') ||
 
-    listToArray[3].classList.contains('box-filled-2') &&
-    listToArray[4].classList.contains('box-filled-2') &&
-    listToArray[5].classList.contains('box-filled-2') ||
+        listToArray[3].classList.contains('box-filled-2') &&
+        listToArray[4].classList.contains('box-filled-2') &&
+        listToArray[5].classList.contains('box-filled-2') ||
 
-    listToArray[6].classList.contains('box-filled-2') &&
-    listToArray[7].classList.contains('box-filled-2') &&
-    listToArray[8].classList.contains('box-filled-2') ||
+        listToArray[6].classList.contains('box-filled-2') &&
+        listToArray[7].classList.contains('box-filled-2') &&
+        listToArray[8].classList.contains('box-filled-2') ||
 
-    listToArray[0].classList.contains('box-filled-2') &&
-    listToArray[3].classList.contains('box-filled-2') &&
-    listToArray[6].classList.contains('box-filled-2') ||
+        listToArray[0].classList.contains('box-filled-2') &&
+        listToArray[3].classList.contains('box-filled-2') &&
+        listToArray[6].classList.contains('box-filled-2') ||
 
-    listToArray[1].classList.contains('box-filled-2') &&
-    listToArray[4].classList.contains('box-filled-2') &&
-    listToArray[7].classList.contains('box-filled-2') ||
+        listToArray[1].classList.contains('box-filled-2') &&
+        listToArray[4].classList.contains('box-filled-2') &&
+        listToArray[7].classList.contains('box-filled-2') ||
 
-    listToArray[2].classList.contains('box-filled-2') &&
-    listToArray[5].classList.contains('box-filled-2') &&
-    listToArray[8].classList.contains('box-filled-2') ||
+        listToArray[2].classList.contains('box-filled-2') &&
+        listToArray[5].classList.contains('box-filled-2') &&
+        listToArray[8].classList.contains('box-filled-2') ||
 
-    listToArray[0].classList.contains('box-filled-2') &&
-    listToArray[4].classList.contains('box-filled-2') &&
-    listToArray[8].classList.contains('box-filled-2') ||
+        listToArray[0].classList.contains('box-filled-2') &&
+        listToArray[4].classList.contains('box-filled-2') &&
+        listToArray[8].classList.contains('box-filled-2') ||
 
-    listToArray[2].classList.contains('box-filled-2') &&
-    listToArray[4].classList.contains('box-filled-2') &&
-    listToArray[6].classList.contains('box-filled-2')
+        listToArray[2].classList.contains('box-filled-2') &&
+        listToArray[4].classList.contains('box-filled-2') &&
+        listToArray[6].classList.contains('box-filled-2')
     ) {
         boxes.style.display = 'none';
         finishScreen.classList.add('screen-win-two');
@@ -195,11 +195,11 @@ function ifTie() {
 
 function clearTheBoard() {
     // Once game restart again , reset the counter 
-    count = 0 ;
+    count = 0;
     for (let i = 0; i < listToArray.length; i++) {
         if (listToArray[i].classList.contains('box-filled-1')) {
             listToArray[i].classList.remove('box-filled-1');
-             // Renable the pointer once the game restart
+            // Renable the pointer once the game restart
             listToArray[i].style.pointerEvents = 'auto';
         }
         if (listToArray[i].classList.contains('box-filled-2')) {
@@ -211,3 +211,56 @@ function clearTheBoard() {
     player2.classList.remove('active');
 }
 
+function createInputElement() {
+    const div = document.createElement('div');
+    div.className = 'nameDiv';
+    div.style.marginTop = '6em';
+    div.style.width = "60%";
+    div.style.marginLeft = 'auto';
+    div.style.marginRight = 'auto';
+    const label = document.createElement('label');
+    label.className = 'nameLabel'
+    label.textContent = "Your Name";
+    label.style.fontSize = '1.5em';
+    label.style.margin = '1em';
+    label.style.color = '#fff';
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'nameInput';
+    nameInput.style.borderRadius = '4px';
+    nameInput.style.border = 'none';
+    nameInput.style.textIndent = '12px';
+    nameInput.style.lineHeight = '2em';
+    nameInput.style.color = '#54D17A';
+    nameInput.style.fontSize = '2em';
+    nameInput.style.marginLeft = '.95em';
+    div.appendChild(label);
+    div.appendChild(nameInput);
+    header.appendChild(div);
+}
+createInputElement();
+
+const nameDiv = document.getElementsByClassName('nameDiv')[0];
+const nameLabel = document.getElementsByClassName('nameLabel')[0];
+const nameInput = document.getElementsByClassName('nameInput')[0];
+
+nameInput.focus();
+
+function saveName() {
+    const span = document.createElement('span');
+    span.textContent = "Hey " + nameInput.value  + " ,let's begin";
+    span.className = 'nameSpan';
+    span.style.display = 'block';
+    span.style.color = '#fff';
+    span.style.margin = '2em';
+    span.style.fontSize = '3em';
+    header.insertBefore(span, nameDiv);
+    header.removeChild(nameDiv);
+}
+
+header.addEventListener('keydown', (e) => {
+    if (e.which == 13) {
+        saveName();
+        
+    }
+});
