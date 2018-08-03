@@ -9,17 +9,10 @@ const player1 = document.getElementById('player1');
 const player2 = document.getElementById('player2');
 const boxes = document.querySelector('.boxes');
 const box = document.querySelectorAll('.box');
-const firstBox = boxes.querySelectorAll('li')[0];
-const secondBox = boxes.querySelectorAll('li')[1]
-const thirdBox = boxes.querySelectorAll('li')[2]
-const fourthBox = boxes.querySelectorAll('li')[3]
-const fifthBox = boxes.querySelectorAll('li')[4]
-const sixthBox = boxes.querySelectorAll('li')[5]
-const seventhBox = boxes.querySelectorAll('li')[6]
-const eighthBox = boxes.querySelectorAll('li')[7]
-const ninthBox = boxes.querySelectorAll('li')[8]
 var count = 0;
 
+
+const listToArray = Array.from(box);
 // Initially hide the finish screen
 finishScreen.style.display = 'none';
 // Initially hide the players <li>
@@ -27,37 +20,43 @@ player1.style.display = 'none';
 player2.style.display = 'none';
 startScreen.style.overflow = 'hidden';
 
+
 // setting event listener of newGame button after any of the player has won the game
 newGameButton.addEventListener('click', (event) => {
     finishScreen.style.display = 'none';
+    startScreen.style.display = 'none';
     boxes.style.display = 'block';
-    startScreen.style.display = 'none';
-    window.location.reload();
-    startScreen.style.display = 'none';
+    // Removing the added classes which got added once a player wins or match tied
+    // from the finish screen and starting a new game
+    finishScreen.classList.remove('screen-win-one');
+    finishScreen.classList.remove('screen-win-two');
+    finishScreen.classList.remove('screen-win-tie');
+    clearTheBoard();
 });
+
 // setting event listener on start button , as soon as game is started , 
 // disappear the start screen , show both player <li> and activate player 1 by adding class 'active' 
 startButton.addEventListener('click', (event) => {
     startScreen.style.display = 'none';
     player1.style.display = 'block';
-player2.style.display = 'block';
+    player2.style.display = 'block';
     player1.classList.add('active');
 });
 
-
 boxes.addEventListener('mouseover', (e) => {
-// when mouseover event occurs over any of the box , show the background image as per current active player
+    // when mouseover event occurs over any of the box , show the background image as per current active player
     if (player1.className === 'players active') {
         e.target.style.backgroundImage = "url('img/o.svg')";
     }
     if (player2.className === 'players active') {
         e.target.style.backgroundImage = "url('img/x.svg')";
     }
-// disable the pointer if the box has been filled already
+    // disable the pointer if the box has been filled already
     if (e.target.classList.contains('box-filled-1') || e.target.classList.contains('box-filled-2')) {
         e.target.style.pointerEvents = 'none';
     }
 });
+
 // remove the bg image form a box as user remove his mouse from that particular box
 boxes.addEventListener('mouseout', (e) => {
     e.target.style.backgroundImage = "";
@@ -67,23 +66,19 @@ boxes.addEventListener('click', (e) => {
     // after clicking a box , using callback to add "active" class to opposite player <li>
     // because we want to change the classname some seconds after the box has been filled with current player bg-image
     // otherwise , if class change first then box will be filled with opposite player bg-image
-    setTimeout(checkPlayerActiv, 50);
-// when user click on a box , fill the box with color as per current active player
+    setTimeout(changePlayer, 50);
+    // when user click on a box , fill the box with color as per current active player
     if (player1.classList.contains('active')) {
         e.target.classList.add('box-filled-1');
         count += 1;
-        console.log(count);
-
     }
     if (player2.classList.contains('active')) {
         e.target.classList.add('box-filled-2');
         count += 1;
-        console.log(count);
     }
 
     // checking if the match was tie
     ifTie();
-
     // checking if player 1 win
     ifPlayerOneWin();
     // checking if player 2 win
@@ -91,9 +86,8 @@ boxes.addEventListener('click', (e) => {
 
 });
 
-
 // adding 'active' class to both the players alternatively on each 'click' event over the box
-function checkPlayerActiv() {
+function changePlayer() {
     if (player1.classList.contains('active')) {
         player1.classList.remove('active');
         player2.classList.add('active');
@@ -105,37 +99,37 @@ function checkPlayerActiv() {
 
 
 function ifPlayerOneWin() {
-    if (firstBox.classList.contains('box-filled-1') &&
-        secondBox.classList.contains('box-filled-1') &&
-        thirdBox.classList.contains('box-filled-1') ||
+    if (listToArray[0].classList.contains('box-filled-1') &&
+        listToArray[1].classList.contains('box-filled-1') &&
+        listToArray[2].classList.contains('box-filled-1') ||
 
-        fourthBox.classList.contains('box-filled-1') &&
-        fifthBox.classList.contains('box-filled-1') &&
-        sixthBox.classList.contains('box-filled-1') ||
+        listToArray[3].classList.contains('box-filled-1') &&
+        listToArray[4].classList.contains('box-filled-1') &&
+        listToArray[5].classList.contains('box-filled-1') ||
 
-        seventhBox.classList.contains('box-filled-1') &&
-        eighthBox.classList.contains('box-filled-1') &&
-        ninthBox.classList.contains('box-filled-1') ||
+        listToArray[6].classList.contains('box-filled-1') &&
+        listToArray[7].classList.contains('box-filled-1') &&
+        listToArray[8].classList.contains('box-filled-1') ||
 
-        firstBox.classList.contains('box-filled-1') &&
-        fourthBox.classList.contains('box-filled-1') &&
-        seventhBox.classList.contains('box-filled-1') ||
+        listToArray[0].classList.contains('box-filled-1') &&
+        listToArray[3].classList.contains('box-filled-1') &&
+        listToArray[6].classList.contains('box-filled-1') ||
 
-        secondBox.classList.contains('box-filled-1') &&
-        fifthBox.classList.contains('box-filled-1') &&
-        eighthBox.classList.contains('box-filled-1') ||
+        listToArray[1].classList.contains('box-filled-1') &&
+        listToArray[4].classList.contains('box-filled-1') &&
+        listToArray[7].classList.contains('box-filled-1') ||
 
-        thirdBox.classList.contains('box-filled-1') &&
-        sixthBox.classList.contains('box-filled-1') &&
-        ninthBox.classList.contains('box-filled-1') ||
+        listToArray[2].classList.contains('box-filled-1') &&
+        listToArray[5].classList.contains('box-filled-1') &&
+        listToArray[8].classList.contains('box-filled-1') ||
 
-        firstBox.classList.contains('box-filled-1') &&
-        fifthBox.classList.contains('box-filled-1') &&
-        ninthBox.classList.contains('box-filled-1') ||
+        listToArray[0].classList.contains('box-filled-1') &&
+        listToArray[4].classList.contains('box-filled-1') &&
+        listToArray[8].classList.contains('box-filled-1') ||
 
-        thirdBox.classList.contains('box-filled-1') &&
-        fifthBox.classList.contains('box-filled-1') &&
-        seventhBox.classList.contains('box-filled-1')
+        listToArray[2].classList.contains('box-filled-1') &&
+        listToArray[4].classList.contains('box-filled-1') &&
+        listToArray[6].classList.contains('box-filled-1')
     ) {
 
         boxes.style.display = 'none';
@@ -146,38 +140,39 @@ function ifPlayerOneWin() {
     }
 }
 
+
 function ifPlayerTwoWin() {
-    if (firstBox.classList.contains('box-filled-2') &&
-        secondBox.classList.contains('box-filled-2') &&
-        thirdBox.classList.contains('box-filled-2') ||
+    if (listToArray[0].classList.contains('box-filled-2') &&
+    listToArray[1].classList.contains('box-filled-2') &&
+    listToArray[2].classList.contains('box-filled-2') ||
 
-        fourthBox.classList.contains('box-filled-2') &&
-        fifthBox.classList.contains('box-filled-2') &&
-        sixthBox.classList.contains('box-filled-2') ||
+    listToArray[3].classList.contains('box-filled-2') &&
+    listToArray[4].classList.contains('box-filled-2') &&
+    listToArray[5].classList.contains('box-filled-2') ||
 
-        seventhBox.classList.contains('box-filled-2') &&
-        eighthBox.classList.contains('box-filled-2') &&
-        ninthBox.classList.contains('box-filled-2') ||
+    listToArray[6].classList.contains('box-filled-2') &&
+    listToArray[7].classList.contains('box-filled-2') &&
+    listToArray[8].classList.contains('box-filled-2') ||
 
-        firstBox.classList.contains('box-filled-2') &&
-        fourthBox.classList.contains('box-filled-2') &&
-        seventhBox.classList.contains('box-filled-2') ||
+    listToArray[0].classList.contains('box-filled-2') &&
+    listToArray[3].classList.contains('box-filled-2') &&
+    listToArray[6].classList.contains('box-filled-2') ||
 
-        secondBox.classList.contains('box-filled-2') &&
-        fifthBox.classList.contains('box-filled-2') &&
-        eighthBox.classList.contains('box-filled-2') ||
+    listToArray[1].classList.contains('box-filled-2') &&
+    listToArray[4].classList.contains('box-filled-2') &&
+    listToArray[7].classList.contains('box-filled-2') ||
 
-        thirdBox.classList.contains('box-filled-2') &&
-        sixthBox.classList.contains('box-filled-2') &&
-        ninthBox.classList.contains('box-filled-2') ||
+    listToArray[2].classList.contains('box-filled-2') &&
+    listToArray[5].classList.contains('box-filled-2') &&
+    listToArray[8].classList.contains('box-filled-2') ||
 
-        firstBox.classList.contains('box-filled-2') &&
-        fifthBox.classList.contains('box-filled-2') &&
-        ninthBox.classList.contains('box-filled-2') ||
+    listToArray[0].classList.contains('box-filled-2') &&
+    listToArray[4].classList.contains('box-filled-2') &&
+    listToArray[8].classList.contains('box-filled-2') ||
 
-        thirdBox.classList.contains('box-filled-2') &&
-        fifthBox.classList.contains('box-filled-2') &&
-        seventhBox.classList.contains('box-filled-2')
+    listToArray[2].classList.contains('box-filled-2') &&
+    listToArray[4].classList.contains('box-filled-2') &&
+    listToArray[6].classList.contains('box-filled-2')
     ) {
         boxes.style.display = 'none';
         finishScreen.classList.add('screen-win-two');
@@ -197,16 +192,22 @@ function ifTie() {
     }
 }
 
-// function clearTheBoard() {
-//     // firstBox.className = 'box';
-//     // secondBox.className = 'box';
-//     // thirdBox.className = 'box';
-//     // fourthBox.className = 'box';
-//     // fifthBox.className = 'box';
-//     // sixthBox.className = 'box';
-//     // seventhBox.className = 'box';
-//     // eighthBox.className = 'box';
-//     // ninthBox.className = 'box';
-//     window.location.reload();
 
-// }
+function clearTheBoard() {
+    // Once game restart again , reset the counter 
+    count = 0 ;
+    for (let i = 0; i < listToArray.length; i++) {
+        if (listToArray[i].classList.contains('box-filled-1')) {
+            listToArray[i].classList.remove('box-filled-1');
+             // Renable the pointer once the game restart
+            listToArray[i].style.pointerEvents = 'auto';
+        }
+        if (listToArray[i].classList.contains('box-filled-2')) {
+            listToArray[i].classList.remove('box-filled-2');
+            listToArray[i].style.pointerEvents = 'auto';
+        }
+    }
+    player1.classList.add('active');
+    player2.classList.remove('active');
+}
+
