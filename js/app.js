@@ -136,8 +136,9 @@ function ifPlayerOneWin() {
 
         boxes.style.display = 'none';
         finishScreen.classList.add('screen-win-one');
-        finishMessage.textContent = nameInput.value + " is winner";
+        finishMessage.textContent = nameInput.value + " won the game!";
         finishScreen.style.display = 'block';
+        finishMessage.style.fontSize = '4em';
         return true;
     }
 }
