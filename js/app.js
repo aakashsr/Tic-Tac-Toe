@@ -567,7 +567,7 @@ function ifPlayerOneWin() {
 function playerWins() {
     boxes.style.display = 'none';
     finishScreen.classList.add('screen-win-one');
-    finishMessage.textContent = "Winner:" + nameInput.value;
+    finishMessage.textContent = "Winner: " + nameInput.value;
     finishScreen.style.display = 'block';
 }
 // function to delay the move of computer a few seconds so that player and computer move don't get overlapped
@@ -612,7 +612,7 @@ function ifPlayerTwoWin() {
 function computerWins() {
     boxes.style.display = 'none';
     finishScreen.classList.add('screen-win-two');
-    finishMessage.textContent = "Winner:Computer";
+    finishMessage.textContent = "Winner: Computer";
     finishScreen.style.display = 'block';
     return true;
 }
@@ -653,7 +653,7 @@ nameInput.focus();
 // function to remove the input field and greeting the player on the start screen
 function saveName() {
     const span = document.createElement('span');
-    span.textContent = "Hey " + nameInput.value + " ,let's begin";
+    span.textContent = "Hey " + nameInput.value + ",let's begin";
     span.className = 'nameSpan';
     span.style.display = 'block';
     span.style.color = '#fff';
