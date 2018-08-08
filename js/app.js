@@ -138,8 +138,13 @@ boxes.addEventListener('click', (e) => {
     // checking if the match was tie
     ifPlayerOneWin();
     ifTie();
-    setTimeout(computerMove, 400);
-});
+    // preventing the players from creating double cross boxes when user click double click on any box . As on first click , 'active' class will be added to 'player2' , so it 
+    // will disable the second click or will not do anything
+    if (player1.classList.contains('active')) {
+        setTimeout(computerMove, 800);
+    }
+
+}, false);
 
 function nameElement() {
     const yourName = document.createElement('span');
