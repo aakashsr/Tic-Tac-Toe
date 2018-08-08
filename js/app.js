@@ -138,7 +138,7 @@ boxes.addEventListener('click', (e) => {
     // checking if the match was tie
     ifPlayerOneWin();
     ifTie();
-    setTimeout(computerMove, 200);
+    setTimeout(computerMove, 500);
 });
 
 function nameElement() {
@@ -604,7 +604,7 @@ function ifPlayerTwoWin() {
         listToArray[4].classList.contains('box-filled-2') &&
         listToArray[6].classList.contains('box-filled-2')
     ) {
-        setTimeout(computerWins, 200);
+        setTimeout(computerWins, 500);
     }
 }
 
