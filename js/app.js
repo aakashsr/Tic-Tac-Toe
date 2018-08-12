@@ -146,7 +146,7 @@ pVsCbutton.style.pointerEvents = 'none';
 playerChecked.addEventListener('click', (e) => {
     if (playerChecked.checked) {
         pVsPbutton.style.pointerEvents = 'auto';
-        if (e.target.value !== "") {
+        if (nameInput.value !== "") {
             saveName();
         }
     } else {
@@ -156,7 +156,7 @@ playerChecked.addEventListener('click', (e) => {
 computerChecked.addEventListener('click', (e) => {
     if (computerChecked.checked) {
         pVsCbutton.style.pointerEvents = 'auto';
-        if (e.target.value !== "") {
+        if (nameInput.value !== "") {
            saveName();
         }
     } else {
