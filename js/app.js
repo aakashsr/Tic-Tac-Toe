@@ -225,7 +225,7 @@ boxes.addEventListener('mouseout', (e) => {
 boxes.addEventListener('click', (e) => {
 
     if (e.target.className === 'box') {
-        setTimeout(playerOneToTwo, 50);
+        setTimeout(changePlayer, 50);
         if (player1.classList.contains('active')) {
             e.target.classList.add('box-filled-1');
             count += 1;
@@ -264,10 +264,13 @@ function nameElement() {
     player2.appendChild(rivalName);
 }
 //Changing the active state from player 1 to player 2
-function playerOneToTwo() {
+function changePlayer() {
     if (player1.classList.contains('active')) {
         player1.classList.remove('active');
         player2.classList.add('active');
+    } else{
+        player2.classList.remove('active');
+        player1.classList.add('active');
     }
 }
 
