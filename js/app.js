@@ -9,6 +9,7 @@ var count = 0;
 const finishScreen = document.getElementById('finish');
 const message = finishScreen.querySelector('.message');
 
+
 heading.style.marginBottom = '.75em';
 startScreen.style.overflow = 'hidden';
 //function to create two buttons at the start screen
@@ -160,7 +161,7 @@ computerChecked.addEventListener('click', (e) => {
     if (computerChecked.checked) {
         pVsCbutton.style.pointerEvents = 'auto';
         if (nameInput.value !== "") {
-           saveName();
+            saveName();
         }
     } else {
         pVsCbutton.style.pointerEvents = 'none';
@@ -221,7 +222,7 @@ boxes.addEventListener('mouseout', (e) => {
     e.target.style.backgroundImage = "";
 });
 
-// ------------------------- Main Control ------------------------- //
+// ------------------------- Main Control ------------------------- 
 
 // If 'player VS player' checkbox is checked , then let the second player move his chance
 // if 'player VS computer' checkbox is checked , make the second player to move automatically
@@ -244,11 +245,13 @@ boxes.addEventListener('click', (e) => {
         }
         // if 'player vs computer' button is checked
         if (computerChecked.checked) {
-            setTimeout(computerMove, 700);
+            setTimeout(computerMove, 350);
             checkIfTie();
         }
     }
 });
+
+// ------------------------- /Main Control ------------------------- 
 
 // Creating name of both the players
 function createName(nameValue) {
@@ -261,17 +264,23 @@ function createName(nameValue) {
 }
 // Appending the name of both the players
 function nameElement() {
-    const yourName = createName('Aakash');
-    const rivalName = createName('Computer');
+    const yourName = createName(nameInput.value);
+    let rivalName;
+    if (playerChecked.checked) {
+        rivalName = createName('Player 2');
+    } else {
+        rivalName = createName('Computer');
+    }
     player1.appendChild(yourName);
     player2.appendChild(rivalName);
 }
+
 //Changing the active state from player 1 to player 2
 function changePlayer() {
     if (player1.classList.contains('active')) {
         player1.classList.remove('active');
         player2.classList.add('active');
-    } else{
+    } else {
         player2.classList.remove('active');
         player1.classList.add('active');
     }
