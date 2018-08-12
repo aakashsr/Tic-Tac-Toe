@@ -2,12 +2,15 @@ const player1 = document.getElementById('player1');
 const player2 = document.getElementById('player2');
 const startScreen = document.getElementById('start');
 const header = startScreen.querySelector('header');
+const heading = header.querySelector('h1');
 const boxes = document.querySelector('.boxes');
 const box = document.querySelectorAll('.box');
 var count = 0;
 const finishScreen = document.getElementById('finish');
 const message = finishScreen.querySelector('.message');
 
+heading.style.marginBottom = '.75em';
+startScreen.style.overflow = 'hidden';
 //function to create two buttons at the start screen
 function createDiv() {
     const divName = document.createElement('div');
@@ -617,7 +620,7 @@ function randomCase() {
 // function to remove the input field and greet the player on the start screen
 function saveName() {
     const span = document.createElement('span');
-    span.textContent = "Hey " + nameInput.value + ", let's begin...";
+    span.textContent = "Hey " + nameInput.value + " , let's begin...";
     span.className = 'nameSpan';
     span.style.display = 'block';
     span.style.color = '#fff';
