@@ -354,7 +354,11 @@ function ifPlayerTwoWin() {
 function playerTwoWins() {
     boxes.style.display = 'none';
     finishScreen.classList.add('screen-win-two');
-    message.textContent = "Winner: Computer";
+    if (playerChecked.checked) {
+        message.textContent = "Winner: Player 2";
+    } else {
+        message.textContent = "Winner: Computer";
+    }
     finishScreen.style.display = 'block';
 }
 // function to display the winning screen of tie match
@@ -625,7 +629,6 @@ function randomCase() {
         playerTwoToOne();
     }
 }
-
 // function to remove the input field and greet the player on the start screen
 function saveName() {
     const span = document.createElement('span');
