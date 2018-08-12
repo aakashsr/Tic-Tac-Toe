@@ -617,12 +617,12 @@ function randomCase() {
 // function to remove the input field and greet the player on the start screen
 function saveName() {
     const span = document.createElement('span');
-    span.textContent = "Hey " + nameInput.value + " , let's begin";
+    span.textContent = "Hey " + nameInput.value + " , let's begin...";
     span.className = 'nameSpan';
     span.style.display = 'block';
     span.style.color = '#fff';
     span.style.margin = '2em';
-    span.style.fontSize = '1.5em';
+    span.style.fontSize = '1.35em';
     header.insertBefore(span, nameDiv);
     header.removeChild(nameDiv);
 }
