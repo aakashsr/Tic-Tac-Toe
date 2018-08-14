@@ -141,7 +141,6 @@ header.addEventListener('click', (e) => {
             nameElement();
         }
     }
-
 });
 // Initially disabling the pointer events at both the buttons
 pVsPbutton.style.pointerEvents = 'none';
@@ -228,26 +227,27 @@ boxes.addEventListener('mouseout', (e) => {
 // if 'player VS computer' checkbox is checked , make the second player to move automatically
 boxes.addEventListener('click', (e) => {
 
-    if (e.target.className === 'box') {
-        setTimeout(changePlayer, 50);
+    if (playerChecked.checked) {
         if (player1.classList.contains('active')) {
             e.target.classList.add('box-filled-1');
             count += 1;
         }
-        if (playerChecked.checked) {
-            if (player2.classList.contains('active')) {
-                e.target.classList.add('box-filled-2');
-                count += 1;
-            }
-            ifPlayerOneWin();
-            ifPlayerTwoWin();
-            checkIfTie();
+        if (player2.classList.contains('active')) {
+            e.target.classList.add('box-filled-2');
+            count += 1;
         }
-        // if 'player vs computer' button is checked
-        if (computerChecked.checked) {
-            setTimeout(computerMove, 350);
-            checkIfTie();
-        }
+        ifPlayerOneWin();
+        ifPlayerTwoWin();
+        checkIfTie();
+        changePlayer();
+    }
+
+    if (computerChecked.checked) {
+        e.target.classList.add('box-filled-1');
+        count += 1;
+        checkIfTie();
+        computerMove();
+        console.log("Hey!");
     }
 });
 
@@ -345,7 +345,7 @@ function ifPlayerTwoWin() {
             playerTwoWins();
         }
         if (computerChecked.checked) {
-            setTimeout(playerTwoWins, 400);
+            setTimeout(playerTwoWins,400);
         }
         return true;
     }
@@ -383,10 +383,9 @@ function isNotFilled(num) {
 // function to add 'box-filled-2' class to a new box and check it player two wins the game
 function checkIfSecondPlayerWin(index) {
     listToArray[index].classList.add('box-filled-2');
-    checkIfTie();
+    // checkIfTie();
     ifPlayerTwoWin();
     count += 1;
-    playerTwoToOne();
 }
 
 // function to add 'box-filled-2' class to a new box to prevent player one from winning
@@ -395,7 +394,7 @@ function checkIfFirstPlayerWin(sub) {
     checkIfTie();
     ifPlayerOneWin();
     count += 1;
-    playerTwoToOne();
+    // playerTwoToOne();
 }
 // function to check "if two boxes with index 'num1' and 'num2' are filled with 'box-filled-2' class then check if the 
 // next box with index 'num3' is empty or not . If empty , return 'true' "
@@ -619,14 +618,16 @@ function randomCase() {
     if (isNotFilled(x) === false) {
         listToArray[x].classList.add('box-filled-2');
         count += 1;
-        playerTwoToOne();
+        // playerTwoToOne();
+        // checkPointer();
     } else {
         while (isNotFilled(x) === true && count !== 9) {
             x = Math.floor(Math.random() * 9);
         }
         listToArray[x].classList.add('box-filled-2');
         count += 1;
-        playerTwoToOne();
+        // playerTwoToOne();
+        // checkPointer();
     }
 }
 // function to remove the input field and greet the player on the start screen
