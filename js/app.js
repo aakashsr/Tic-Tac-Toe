@@ -233,7 +233,6 @@ boxes.addEventListener('click', (e) => {
         if (player1.classList.contains('active')) {
             e.target.classList.add('box-filled-1');
             count += 1;
-            disablePointer();
         }
         if (playerChecked.checked) {
             if (player2.classList.contains('active')) {
@@ -388,7 +387,6 @@ function checkIfSecondPlayerWin(index) {
     ifPlayerTwoWin();
     count += 1;
     playerTwoToOne();
-    enablePointer();
 }
 
 // function to add 'box-filled-2' class to a new box to prevent player one from winning
@@ -622,7 +620,6 @@ function randomCase() {
         listToArray[x].classList.add('box-filled-2');
         count += 1;
         playerTwoToOne();
-        enablePointer();
     } else {
         while (isNotFilled(x) === true && count !== 9) {
             x = Math.floor(Math.random() * 9);
@@ -630,7 +627,6 @@ function randomCase() {
         listToArray[x].classList.add('box-filled-2');
         count += 1;
         playerTwoToOne();
-        enablePointer();
     }
 }
 // function to remove the input field and greet the player on the start screen
@@ -644,20 +640,4 @@ function saveName() {
     span.style.fontSize = '1.35em';
     header.insertBefore(span, nameDiv);
     header.removeChild(nameDiv);
-}
-
-function disablePointer() {
-    for (let i = 0; i < box.length; i++) {
-        box[i].style.pointerEvents = 'none';
-    }
-}
-
-function enablePointer() {
-    for (let i = 0; i < box.length; i++) {
-        if (box[i].classList.contains('box-filled-1') || box[i].classList.contains('box-filled-2')) {
-            box[i].style.pointerEvents = 'none';
-        } else {
-            box[i].style.pointerEvents = 'auto';
-        }
-    }
 }
