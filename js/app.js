@@ -245,7 +245,7 @@ boxes.addEventListener('click', (e) => {
         }
         // if 'player vs computer' button is checked
         if (computerChecked.checked) {
-            setTimeout(computerMove, 1050);
+            setTimeout(computerMove, 350);
             checkIfTie();
         }
     }
