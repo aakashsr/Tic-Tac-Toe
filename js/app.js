@@ -246,11 +246,14 @@ boxes.addEventListener('click', (e) => {
 
     if (computerChecked.checked) {
         if (e.target.className === 'box') {
-            e.target.classList.add('box-filled-1');
-            count += 1;
-            checkIfTie();
-            computerMove();
-            console.log("Hey!");
+            if (player1.classList.contains('active')) {
+                e.target.classList.add('box-filled-1');
+                count += 1;
+                checkIfTie();
+                changePlayer();
+                setTimeout(computerMove, 1000);
+                console.log("Hey!");
+            }
         }
     }
 });
@@ -390,6 +393,8 @@ function checkIfSecondPlayerWin(index) {
     // checkIfTie();
     ifPlayerTwoWin();
     count += 1;
+    playerTwoToOne();
+
 }
 
 // function to add 'box-filled-2' class to a new box to prevent player one from winning
@@ -622,7 +627,7 @@ function randomCase() {
     if (isNotFilled(x) === false) {
         listToArray[x].classList.add('box-filled-2');
         count += 1;
-        // playerTwoToOne();
+        playerTwoToOne();
         // checkPointer();
     } else {
         while (isNotFilled(x) === true && count !== 9) {
@@ -630,7 +635,7 @@ function randomCase() {
         }
         listToArray[x].classList.add('box-filled-2');
         count += 1;
-        // playerTwoToOne();
+        playerTwoToOne();
         // checkPointer();
     }
 }
