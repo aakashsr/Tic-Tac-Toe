@@ -554,7 +554,7 @@ function computerMove() {
         checkIfSecondPlayerWin(4);
 
     } else if (saveGame(6, 8, 7)) {
-        checkIfSecondPlayerWin(8);
+        checkIfSecondPlayerWin(7);
 
     } else if (saveGame(0, 6, 3)) {
         checkIfSecondPlayerWin(3);
