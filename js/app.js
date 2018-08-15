@@ -348,12 +348,7 @@ function ifPlayerTwoWin() {
         playerTwoMatched(0, 4, 8) ||
         playerTwoMatched(2, 4, 6)
     ) {
-        if (playerChecked.checked) {
-            playerTwoWins();
-        }
-        if (computerChecked.checked) {
-            setTimeout(playerTwoWins, 50);
-        }
+        playerTwoWins();
         return true;
     }
 }
@@ -390,8 +385,8 @@ function isNotFilled(num) {
 // function to add 'box-filled-2' class to a new box and check it player two wins the game
 function checkIfSecondPlayerWin(index) {
     listToArray[index].classList.add('box-filled-2');
-    // checkIfTie();
     ifPlayerTwoWin();
+    checkIfTie();
     count += 1;
     playerTwoToOne();
 
