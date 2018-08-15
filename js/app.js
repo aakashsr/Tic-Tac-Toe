@@ -228,26 +228,30 @@ boxes.addEventListener('mouseout', (e) => {
 boxes.addEventListener('click', (e) => {
 
     if (playerChecked.checked) {
-        if (player1.classList.contains('active')) {
-            e.target.classList.add('box-filled-1');
-            count += 1;
+        if (e.target.className === 'box') {
+            if (player1.classList.contains('active')) {
+                e.target.classList.add('box-filled-1');
+                count += 1;
+            }
+            if (player2.classList.contains('active')) {
+                e.target.classList.add('box-filled-2');
+                count += 1;
+            }
+            ifPlayerOneWin();
+            ifPlayerTwoWin();
+            checkIfTie();
+            changePlayer();
         }
-        if (player2.classList.contains('active')) {
-            e.target.classList.add('box-filled-2');
-            count += 1;
-        }
-        ifPlayerOneWin();
-        ifPlayerTwoWin();
-        checkIfTie();
-        changePlayer();
     }
 
     if (computerChecked.checked) {
-        e.target.classList.add('box-filled-1');
-        count += 1;
-        checkIfTie();
-        computerMove();
-        console.log("Hey!");
+        if (e.target.className === 'box') {
+            e.target.classList.add('box-filled-1');
+            count += 1;
+            checkIfTie();
+            computerMove();
+            console.log("Hey!");
+        }
     }
 });
 
@@ -345,7 +349,7 @@ function ifPlayerTwoWin() {
             playerTwoWins();
         }
         if (computerChecked.checked) {
-            setTimeout(playerTwoWins,400);
+            setTimeout(playerTwoWins, 400);
         }
         return true;
     }
