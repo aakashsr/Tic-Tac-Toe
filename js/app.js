@@ -352,7 +352,7 @@ function ifPlayerTwoWin() {
             playerTwoWins();
         }
         if (computerChecked.checked) {
-            setTimeout(playerTwoWins, 400);
+            setTimeout(playerTwoWins, 50);
         }
         return true;
     }
